@@ -31,6 +31,7 @@ import cih.spring.repository.CustomLayerRepository;
 import cih.spring.repository.LineStringMarkerRepository;
 import cih.spring.repository.PointMarkerRepository;
 import cih.spring.repository.PolygonMarkerRepository;
+import cih.spring.wrapper.CustomLayerWrapper;
 import cih.spring.wrapper.MarkerHandlerWrapper;
 
 @Controller
@@ -67,23 +68,14 @@ public class CustomLayerController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/findPointsById", produces = "application/json")
-	public @JsonRawValue @ResponseBody List<PointMarker> findPointsById(
+	public @JsonRawValue @ResponseBody CustomLayerWrapper findPointsById(
 			@RequestParam(value = "id") Long id) {
-		Iterable<PointMarker> findAllPoints = pointrepository.findAll();
-		List<PointMarker> points = new ArrayList<>();
-		for (PointMarker pointMarker : findAllPoints) {
-			if (pointMarker.getLayer().getId().equals(id)) {
-				points.add(pointMarker);
-			}
-		}
-		return points;
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/test", produces = "application/json")
-	public @JsonRawValue @ResponseBody MarkerHandlerWrapper test(Model model) {
-		MarkerHandlerWrapper markerHandlerWrapper = new MarkerHandlerWrapper();
-		model.addAttribute(markerHandlerWrapper);
-		return markerHandlerWrapper;
+		Iterable<PointMarker> points = pointrepository.findAll();
+		Iterable<PolygonMarker> polygons = polyrepository.findAll();
+		Iterable<LineStringMarker> linestrings = linerepository.findAll();
+		CustomLayer layer = customrepository.findOne(id);
+		CustomLayerWrapper layerwrapper = new CustomLayerWrapper(layer, points, polygons, linestrings);
+		return layerwrapper;
 	}
 
 	private PolygonMarker createPolygon(MarkerHandler marker, CustomLayer layer)

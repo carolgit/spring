@@ -1,5 +1,7 @@
 package cih.spring.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +14,11 @@ import com.vividsolutions.jts.geom.Polygon;
 
 
 @Entity
-public class PolygonMarker {
+public class PolygonMarker  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -47,7 +53,7 @@ public class PolygonMarker {
 
 	@Override
 	public String toString() {
-		return "PolygonMarker [id=" + id + ", polygon=" + polygon + ", layer="
+		return "PolygonMarker [id=" + id + ", polygon=" + polygon.toText() + ", layer="
 				+ layer + "]";
 	}
 

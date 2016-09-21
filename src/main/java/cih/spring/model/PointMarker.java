@@ -1,5 +1,7 @@
 package cih.spring.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +14,11 @@ import com.vividsolutions.jts.geom.Point;
 
 
 @Entity
-public class PointMarker {
+public class PointMarker  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -47,7 +53,7 @@ public class PointMarker {
 
 	@Override
 	public String toString() {
-		return "PointMarker [id=" + id + ", point=" + point + ", layer="
+		return "PointMarker [id=" + id + ", point=" + point.toText() + ", layer="
 				+ layer + "]";
 	}
 
