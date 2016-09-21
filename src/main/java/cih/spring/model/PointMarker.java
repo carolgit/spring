@@ -6,13 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.postgis.Point;
+import org.hibernate.annotations.Type;
+
+import com.vividsolutions.jts.geom.Point;
+
 
 @Entity
 public class PointMarker {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Type(type="org.hibernate.spatial.GeometryType")
 	private Point point;
 	@ManyToOne
 	private CustomLayer layer;
@@ -39,6 +43,12 @@ public class PointMarker {
 
 	public void setLayer(CustomLayer layer) {
 		this.layer = layer;
+	}
+
+	@Override
+	public String toString() {
+		return "PointMarker [id=" + id + ", point=" + point + ", layer="
+				+ layer + "]";
 	}
 
 }

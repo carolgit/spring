@@ -37,4 +37,10 @@ public class CustomLayer {
 		this.projection = projection;
 	}
 
+	@Override
+	public String toString() {
+		return "CustomLayer [id=" + id + ", name=" + name + ", projection="
+				+ projection + "]";
+	}
+
 }

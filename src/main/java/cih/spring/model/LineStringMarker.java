@@ -6,13 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.postgis.LineString;
+import org.hibernate.annotations.Type;
+
+import com.vividsolutions.jts.geom.LineString;
+
 
 @Entity
 public class LineStringMarker {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Type(type="org.hibernate.spatial.GeometryType")
 	private LineString linestring;
 	@ManyToOne
 	private CustomLayer layer;
@@ -40,4 +44,11 @@ public class LineStringMarker {
 	public void setLayer(CustomLayer layer) {
 		this.layer = layer;
 	}
+
+	@Override
+	public String toString() {
+		return "LineStringMarker [id=" + id + ", linestring=" + linestring
+				+ ", layer=" + layer + "]";
+	}
+	
 }

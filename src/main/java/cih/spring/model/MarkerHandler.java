@@ -26,20 +26,3 @@ public class MarkerHandler {
 	}
  
 }
-/* Exemplo de json 
- *{
-	"markerwrapper": {
-		"markers": [{
-			"wkt": "POINT(-105.01621  39.57422)",
-			"type": "Point"
-		}, {
-			"wkt": "POLYGON(  -109.0283203125 36.98500309285596,-109.0283203125 40.97989806962013,-102.06298828125 40.97989806962013,-102.06298828125 37.00255267215955,-109.0283203125 36.98500309285596)",
-			"type ": "Polygon "
-		}],
-		"customLayer ": {
-			"name ": "layer_test ",
-			"projection ": "EPSG: 4326 "
-		}
-	}
-}
-*/
